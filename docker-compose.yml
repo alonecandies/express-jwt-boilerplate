@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  node-app:
+    depends_on:
+      - mysqldb
+    build:
+      - context: .
+      - dockerfile: ./Dockerfile
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - '3000:3000'
+    image: node-app
+    container_name: node-app
+    environment:
+      - DB_HOST=$HOST
+      - DB_USER=$USER
+      - DB_PASSWORD=$PASSWORD
+      - DB_NAME=$DATABASE
+    volumes:
+      - .:/home/node/app
+    networks:
+      - node-network
+    stdin_open: true
+    tty: true
+
+  mysqldb:
+    image: mysql:8.0.27
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$PASSWORD
+      - MYSQL_DATABASE=$DATABASE
+    ports:
+      - '3306:3306'
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - node-network
+
+volumes:
+  dbdata:
+
+networks:
+  node-network:
+    driver: bridge

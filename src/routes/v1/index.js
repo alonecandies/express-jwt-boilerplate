@@ -11,9 +11,9 @@ const defaultRoutes = [
     route: userRoute,
   },
   {
-    path:'/role',
-    route: roleRoute
-  }
+    path: '/role',
+    route: roleRoute,
+  },
 ];
 
 defaultRoutes.forEach((route) => {

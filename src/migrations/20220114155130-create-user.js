@@ -42,12 +42,12 @@ module.exports = {
       verifyToken: {
         type: Sequelize.STRING,
         allowNull: true,
-        defaultValue: null
+        defaultValue: null,
       },
       isVerified: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: false
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

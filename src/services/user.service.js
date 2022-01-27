@@ -1,13 +1,25 @@
 const httpStatus = require('http-status');
 const ApiError = require('../utils/ApiError');
-const { User } = require('../models');
+const { User,Role, Permission } = require('../models');
 
 const getUserByKey = async (key, value) => {
   return await User.findOne({ where: { [key]: value } });
 };
 
 const getAllUsers = async () => {
-  return await User.findAll();
+  return await User.findAll({
+    include:[
+      {
+        model: Role,
+        include: [
+          {
+            model: Permission,
+            as: 'permissions'
+          }
+        ]
+      }
+    ]
+  });
 };
 
 const queryUsers = async (filter, options) => {

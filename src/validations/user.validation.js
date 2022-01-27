@@ -26,7 +26,7 @@ const getUsers = {
 
 const getUser = {
   params: Joi.object().keys({
-    userId: Joi.number(),
+    userId: Joi.number().required(),
   }),
 };
 

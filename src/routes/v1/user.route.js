@@ -19,6 +19,6 @@ router
 
 router.route('/profile').get(userController.getCurrentUser);
 
-router.route('/allUsers').get(auth('getUsers'), userController.getAllUser);
+router.route('/allUsers').get(auth('getUsers'), userController.getAllUsers);
 
 module.exports = router;
